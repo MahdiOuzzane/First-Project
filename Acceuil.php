@@ -19,9 +19,11 @@
        </div>
        <div class=b>
            <div class=b1><h2>Trouver un professeur</h2></div>
-           <div class=b2><form action="Acceuil.php" method="POST" >
+           <div class=b2><form name="vform" onsubmit="return check()" action="Acceuil.php" method="POST" >
                <input type="text" placeholder="Quelle matiére" name="matiere">
+               <div id="matiere_erreur"></div>
                <input type="text" placeholder="adress ville ou quartier" name="adresse">
+               <div id="adresse_erreur"></div>
                    <button type="submit" value=Recherche name="Recherche" >Rechercher</button>
            </form></div>
        </div>
@@ -122,6 +124,30 @@
         }
      }
   ?>
-  
+  <script>
+      function check(){
+          let matiere = document.forms["vform"]["matiere"];
+          let matiere_erreur = document.getElementById("matiere_erreur");
+          let adresse = document.forms["vform"]["adresse"];
+          let adresse_erreur = document.getElementById("adresse_erreur");
+          if(matiere.value !== ""){
+               matiere_erreur.textContent = "";
+          }
+          if(adresse.value !== ""){
+               adresse_erreur.textContent = "";
+           }
+          if (matiere.value == ""){
+               matiere_erreur.textContent = "le champ est vide !";
+               matiere_erreur.style = "color:red";
+               return false;
+           }
+          if (adresse.value == ""){
+               adresse_erreur.textContent = "le champ est vide !";
+               adresse_erreur.style = "color:red";
+               return false;
+           }
+          return true ;
+      }
+  </script>
 </body>
 </html>

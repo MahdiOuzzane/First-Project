@@ -52,15 +52,48 @@
       
        <div class=b>
            <div class=b1><h2>Se connecter</h2></div>
-           <div class=b2><form action="Connecter.php" method="POST">
+           <div class=b2><form name="vform" onsubmit="return check()" action="Connecter.php" method="POST">
                <input type="text" placeholder="pseudo" name="pseudo">
+               <div id="pseudo_erreur"></div>
                <input type="password" placeholder="Mot de passe" name="mdp">
+               <div id="mdp_erreur"></div>
                    <button type="submit" values="Se conecter" name="submit">se connecter</button>
                    <a href=Inscription.php>S'inscrire</a>
            </form></div>
        </div>
        <div class=c></div>
    </div>
+   <script>
+      function check(){
+       let pseudo = document.forms["vform"]["pseudo"];
+       let pseudo_erreur =  document.getElementById("pseudo_erreur");
+       let mdp = document.forms["vform"]["mdp"];
+       let mdp_erreur =  document.getElementById("mdp_erreur");
+       if(pseudo.value !== ""){
+               pseudo_erreur.textContent = "";
+       }
+       if(mdp.value !== ""){
+               mdp_erreur.textContent = "";
+       }
+       if (pseudo.value == ""){
+               pseudo_erreur.textContent = "le champ est vide !";
+               pseudo_erreur.style = "color:red";
+               pseudo.focus();
+               return false;
+        }       
+       if (mdp.value == ""){
+               mdp_erreur.textContent = "le champ est vide !";
+               mdp_erreur.style = "color:red";
+               return false;
+       }
+       if(mdp.value.length < 8){
+               mdp_erreur.textContent = "le mot de passe doit avoir plus de 8 caractères !";
+               mdp_erreur.style = "color:red";
+               return false;
+        }
+        return true ;
+      }
+   </script>
     
 </body>
 </html>
